@@ -1,26 +1,31 @@
 import { Component } from 'react'
-import { Container, NavbarContainer, Wrapper } from '../styles/NavStyle'
+import { Container, ContainerType, NavbarContainer, ContainerFunctional } from '../styles/NavStyle'
 import Logo from '../assets/logo.svg'
+import ShoppingCart from '../assets/shopping-cart.svg'
+import CurrencyChanger from '../assets/currency-changer.svg'
+
+
+
 
 export default class Navbar extends Component {
 	render() {
 		return (
-			<>
-			<Wrapper>
+			<Container>
+					<ContainerType>
+						<NavbarContainer to='/'>Home</NavbarContainer>
 
-				<Container>
-					<NavbarContainer to='/'>Home</NavbarContainer>
+						<NavbarContainer to='/WOMEN'>WOMEN</NavbarContainer>
 
-					<NavbarContainer to='/WOMEN'>WOMEN</NavbarContainer>
+						<NavbarContainer to='/MEN'>MEN</NavbarContainer>
 
-					<NavbarContainer to='/MEN'>MEN</NavbarContainer>
-
-					<NavbarContainer to='/KIDS'>KIDS</NavbarContainer>
-				</Container>
+						<NavbarContainer to='/KIDS'>KIDS</NavbarContainer>
+					</ContainerType>
 					<img src={Logo} alt='logo' />
-				
-			</Wrapper>
-			</>
+					<ContainerFunctional>
+						<img src={CurrencyChanger} alt='currencychanger' />
+						<img src={ShoppingCart} alt='shoppingCart' />
+					</ContainerFunctional>
+				</Container>
 		)
 	}
 }
