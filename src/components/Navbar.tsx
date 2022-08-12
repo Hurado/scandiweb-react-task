@@ -1,10 +1,13 @@
 import { Component } from 'react'
-import { Container, NavbarContainer } from '../styles/NavStyle'
+import { Container, NavbarContainer, Wrapper } from '../styles/NavStyle'
+import Logo from '../assets/logo.svg'
 
 export default class Navbar extends Component {
 	render() {
 		return (
 			<>
+			<Wrapper>
+
 				<Container>
 					<NavbarContainer to='/'>Home</NavbarContainer>
 
@@ -14,6 +17,9 @@ export default class Navbar extends Component {
 
 					<NavbarContainer to='/KIDS'>KIDS</NavbarContainer>
 				</Container>
+					<img src={Logo} alt='logo' />
+				
+			</Wrapper>
 			</>
 		)
 	}

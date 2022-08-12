@@ -38,8 +38,7 @@ export const NavbarContainer = styled(NavLink)`
 	}
 `
 
-export const Container = styled.div`
-	position: absolute;
+export const Container = styled.span`
 	left: 0%;
 	right: 0%;
 	top: 0%;
@@ -49,4 +48,10 @@ export const Container = styled.div`
 	margin-bottom: 32px;
 	margin-top: 28px;
 	background: #ffffff;
+`
+
+
+export const Wrapper = styled.span`
+	display: flex;
+	justify-content: space-between;
 `
