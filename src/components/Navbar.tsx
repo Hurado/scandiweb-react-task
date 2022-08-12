@@ -1,9 +1,20 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
+import { Container, NavbarContainer } from '../styles/NavStyle'
 
 export default class Navbar extends Component {
-  render() {
-    return (
-      <div>Navbar</div>
-    )
-  }
+	render() {
+		return (
+			<>
+				<Container>
+					<NavbarContainer to='/'>Home</NavbarContainer>
+
+					<NavbarContainer to='/WOMEN'>WOMEN</NavbarContainer>
+
+					<NavbarContainer to='/MEN'>MEN</NavbarContainer>
+
+					<NavbarContainer to='/KIDS'>KIDS</NavbarContainer>
+				</Container>
+			</>
+		)
+	}
 }
