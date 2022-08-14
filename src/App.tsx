@@ -6,6 +6,8 @@ import MEN from './pages/MEN'
 import NavBar from './components/Navbar'
 import Home from './pages/Home'
 
+
+
 export default class App extends Component {
 	render() {
 		return (
