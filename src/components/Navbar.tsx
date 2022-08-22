@@ -12,13 +12,11 @@ export default class Navbar extends Component {
 		return (
 			<Container>
 					<ContainerType>
-						<NavbarContainer to='/'>Home</NavbarContainer>
+						<NavbarContainer to='/ALL'>ALL</NavbarContainer>
 
-						<NavbarContainer to='/WOMEN'>WOMEN</NavbarContainer>
+						<NavbarContainer to='/CLOTHES'>CLOTHES</NavbarContainer>
 
-						<NavbarContainer to='/MEN'>MEN</NavbarContainer>
-
-						<NavbarContainer to='/KIDS'>KIDS</NavbarContainer>
+						<NavbarContainer to='/TECH'>TECH</NavbarContainer>
 					</ContainerType>
 					<img src={Logo} alt='logo' />
 					<ContainerFunctional>

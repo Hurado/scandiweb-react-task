@@ -1,123 +1,128 @@
-
-
 import React, { Component } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import KIDS from './pages/KIDS'
-import WOMEN from './pages/WOMEN'
-import MEN from './pages/MEN'
+import { Routes, Route, Link } from 'react-router-dom'
+import CLOTHES from './pages/CLOTHES'
+import TECH from './pages/TECH'
 import NavBar from './components/Navbar'
-import Home from './pages/Home'
-import { useQuery ,gql} from '@apollo/client'
+import ALL from './pages/ALL'
+import {
+	ApolloClient,
+	InMemoryCache,
+	gql,from, HttpLink, useQuery
+  } from "@apollo/client";
+import { onError } from '@apollo/client/link/error'
+
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000',
+})
+
+// Log any GraphQL errors or network error that occurred
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.error(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+    )
+  if (networkError) console.error(`[Network error]: ${JSON.stringify(networkError, null, 2)})`)
+})
+
+export const client = new ApolloClient({
+	link: from([errorLink, httpLink]),
+	cache: new InMemoryCache(),
+  });
 
 const GET_CATEGORIES = gql`
   query GetCategories {
-	categories {
+	categories  {
 	  name
 	}
   }  
 `;
 
+// const {id} = this.props.match.params()
+// let product; 
+// if(!Array.isArray(data.product)){
+// 	product=[data.product];
+//   }
+// useQuery query={your_query}>
+// {({ loading, data }) => {
+//   if (loading) return 'Loading...';
+//  	return data.categories.map(item => {
+// 	return (<everything you need>
+// <p>{item.name}</p> ;
 
-interface CategoriesProps {
-	categories: string,
-	name: string
-}
+
+// const id = gql`
+// query type($productId: String!) {
+// 	product(id: $productId) {
+// 		brand
+// 		category
+// 	  description
+// 	  gallery
+// 	  id
+// 	  attributes {
+// 		id
+// 		name
+// 		type
+// 		items {
+// 		  displayValue
+// 		  id
+// 		  value
+// 		}
+// 	  }
+// 	  inStock
+// 	  prices {
+// 		  amount
+// 		  currency {
+// 			  label
+// 			  symbol
+// 			} 
+// 		} 
+// 		name
+// 	}
+// }
+// `;
+
+client 
+  .query({
+	query:GET_CATEGORIES
+  })
+
+  .then(name => this.setState({'name': name}))
+    .then(res => console.log(res))
 
 
-export default class App extends Component {
-	constructor(props:CategoriesProps) {
+	// class Product extends Component { 
+	// 	render() {
+	// 	const {id} =this.props.params}}                                                         
+	//    export default (props) => (
+	// 	<Product
+	// 		{...props}
+	// 		params = {useParams()}
+	//   />)
+
+
+export default class App extends Component <{},{name:{}}> {
+	constructor(props:any) {
 		super(props);
-		this.state = {
-			categories: String,
-			name: String,
-		};
-
-		this.create = this.create.bind(this);
-		this.update = this.update.bind(this);
-		this.delete = this.delete.bind(this);
-		this.handleChange = this.handleChange.bind(this);
+		this.state = {name:{}};
 	}
+		componentDidMount(){
+			fetch('http://localhost:4000/').then(response=>response.json())
+			.then(name=> this.setState({name:{}}))
+		}
 		
 	
-		create(e:any) {
-			// add entity - POST
-			e.preventDefault();
-
-			// creates entity
-			fetch("http://localhost:4000", {
-				"method": "POST",
-				"headers": {
-				  "content-type": "application/json",
-				  "accept": "application/json"
-				},
-				"body": JSON.stringify({
-				  name: this.state.name,
-				  notes: this.state.notes
-				})
-			  })
-			  .then(response => response.json())
-			  .then(response => {
-				console.log(response)
-			  })
-			  .catch(err => {
-				console.log(err);
-			  });
-			}
-			update(e: { preventDefault: () => void }, id:any, name:any) {
-				// update entity - PUT
-				e.preventDefault();
-				// this will update entries with PUT
-				fetch("http://localhost:4000", {
-					"method": "PUT",
-					"headers": {
-						"content-type": "application/json",
-						"accept": "application/json"
-					},
-					"body": JSON.stringify({
-						_id: this.state.id,
-						name: this.state.name,
-						// notes: this.state.notes
-					})
-					})
-					.then(response => response.json())
-					.then(response => { console.log(response);
-					})
-					.catch(err =>{ console.log(err); });
-				}
-				delete(e:any) {
-					// delete entity - DELETE
-					e.preventDefault();
-					// deletes entities
-					fetch(`http://localhost:4000/categories/name/_id/$%7Bthis.state.id%7D/${this.state.id}`, {
-					  "method": "DELETE",
-					  "headers": {
-					
-					  }
-					})
-					.then(response => response.json())
-					.then(response => {
-					  console.log(response);
-					})
-					.catch(err => {
-					  console.log(err);
-					});
-				  }
-				  handleChange(changeObject:any) {
-					this.setState(changeObject)
-				  }
-
 	render() {
-		const newLocal = data.categories[0].name
+		
 		return (
 			<>
 				<NavBar />
 				<Routes>
-					<Route path='/' element={newLocal} />
-					<Route path='/WOMEN' element={<WOMEN />} />
-					<Route path='/MEN' element={<MEN />} />
-					<Route path='/KIDS' element={<KIDS />} />
+					<Route path='/ALL' element={name} />
+					<Route path='/TECH' element={<TECH />} />
+					<Route path='/CLOTHES' element={<CLOTHES />} />
 				</Routes>
 			</>
 		)
 	}
 }
+// `/singleitem/${this.props.item.id}` 

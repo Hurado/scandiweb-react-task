@@ -64,7 +64,7 @@ const client = new ApolloClient({
 	  `,
 })
 
-  .then((result) => console.log(result));
+//   .then((result) => console.log(result));
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
